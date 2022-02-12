@@ -12,6 +12,7 @@ body
 	padding: 10px;
 	margin-top: 0;
 	margin-bottom: 0;
+
 }
 
 img
@@ -100,4 +101,31 @@ html
 {
 	background-color: black;
 	color: white;
+}
+
+pre
+{
+	overflow: auto;
+	background-color: whitesmoke;
+	color: black;
+	padding: 5px;
+}
+
+@media screen and (max-width: 935px)
+{
+	body
+	{margin: 0;}
+}
+
+@media screen and (max-width: 530px)
+{
+	.NavLinks, .NavLink
+	{
+		flex-direction: column;
+	}
+
+	.list
+	{
+		float: none;
+	}
 }
