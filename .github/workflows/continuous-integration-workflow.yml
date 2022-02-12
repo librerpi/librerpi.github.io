@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: apt-get install markdown
+      - run: sudo apt-get install markdown
       - run: ./learn.sh
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v1
