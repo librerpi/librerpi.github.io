@@ -1,0 +1,103 @@
+body
+{
+	background-color: #282c34;
+	color: white;
+	font-size: 12pt;
+	margin-left: 40vh;
+	margin-right: 40vh;
+	height: max-content;
+	border-left: 2px white solid;
+	border-right: 2px white solid;
+	border-bottom: 2px white solid;
+	padding: 10px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+img
+{
+	padding: 20px;
+}
+
+.h
+{
+	display: flex;
+	border-bottom: 2px whitesmoke dotted;
+}
+
+.h a
+{
+	width: min-content;
+	font-size: 30pt;
+		
+}
+
+.list
+{
+	border: white solid 1px;
+	padding: 10px;
+	top: 3;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	float: right;
+	margin: 10px;
+}
+
+.NavLinks
+{
+	margin-top: 1vh;
+	padding: 20px;
+	display: flex;
+	text-align: center;
+	list-style: none;
+}
+
+.Nav
+{
+	border-bottom: 2px white solid;
+	background-image: url("img/banner.jpg");
+	background-position: center 60%;
+	background-size: 130%;
+	height: 40%;
+
+}
+
+.Nav h1
+{
+	background: white;
+	color: black;
+	padding: 10px;
+}
+
+html
+{
+
+	background-image: url("img/bg.jpg");
+	background-repeat: norepeat;
+	background-attachment: fixed;
+	background-size: 130%;
+	background-position: center;
+}
+
+.NavLink a
+{
+	color:black;
+	text-decoration: none;
+	background-color: white;
+	color: black;
+	margin: 0px;
+	padding: 10px;
+
+}
+
+.NavLink
+{
+	margin: 10px;
+}
+
+.NavLink a:hover
+{
+	background-color: black;
+	color: white;
+}
