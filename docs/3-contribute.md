@@ -17,7 +17,7 @@ christinaa's work) is located
 - The website repo is located 
 [here](http://github.com/librerpi/librerpi.github.io).
 
-## Commits
+## Commits
 
 Commit descriptions should describe what you've done, 
 commit messages such as "update file" or "add smth" 
