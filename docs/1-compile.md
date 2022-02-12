@@ -48,14 +48,22 @@ RaspberryPi 4, we don't recommend doing so!
 You have 2 choices:
 
 - You have a non-free stage1 but free stage2
-	
+
+
 	$ nix build -f release.nix rpi4.rpi4.recovery -o stage1-link # stage1
+
 
 - You have a free stage1 but no stage2 (which means linux won't load)
 
+
 	$ nix build -f release.nix rpi4.rpi4.start4 -p stage2-link # stage2
+
 
 After that,
 
-For non-free stage1 but free stage2, copy the stage2 to
-`/boot/start4.elf`
+- For non-free stage1 but free stage2, copy the stage2 to `/boot/start4.elf` ;
+
+- For free stage1 but no stage2, copy the stage1 to the FAT32 partition as 
+`recovery.bin`.
+
+
