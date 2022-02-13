@@ -3,15 +3,13 @@ body
 	background-color: #282c34;
 	color: white;
 	font-size: 12pt;
-	margin-left: 40vh;
-	margin-right: 40vh;
+	max-width: 50em;
 	height: max-content;
 	border-left: 2px white solid;
 	border-right: 2px white solid;
 	border-bottom: 2px white solid;
 	padding: 10px;
-	margin-top: 0;
-	margin-bottom: 0;
+	margin: 0 auto;
 
 }
 
@@ -109,12 +107,6 @@ pre
 	background-color: whitesmoke;
 	color: black;
 	padding: 5px;
-}
-
-@media screen and (max-width: 935px)
-{
-	body
-	{margin: 0;}
 }
 
 @media screen and (max-width: 530px)
