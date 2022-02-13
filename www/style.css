@@ -1,16 +1,14 @@
 body
 {
-	background-color: #282c34;
-	color: white;
+	background-color: #111;
+	color: #ddd;
 	font-size: 12pt;
 	max-width: 50em;
 	height: max-content;
-	border-left: 2px white solid;
-	border-right: 2px white solid;
-	border-bottom: 2px white solid;
+	border-left: 1px skyblue solid;
+	border-right: 1px skyblue solid;
 	padding: 10px;
 	margin: 0 auto;
-
 }
 
 img
@@ -21,7 +19,7 @@ img
 .h
 {
 	display: flex;
-	border-bottom: 2px whitesmoke dotted;
+	border-bottom: 2px #ddd dotted;
 }
 
 .h a
@@ -64,8 +62,8 @@ img
 
 .Nav h1
 {
-	background: white;
-	color: black;
+	background: #ddd;
+	color: #111;
 	padding: 10px;
 }
 
@@ -121,3 +119,6 @@ pre
 		float: none;
 	}
 }
+
+
+
