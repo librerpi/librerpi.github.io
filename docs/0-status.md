@@ -3,6 +3,10 @@ Status
 
 <table>
 <tr>
+	<td>Multi-core support</td>
+	<td style="background: red;">Broken</td>
+</tr>
+<tr>
 	<td>Composite NTSC video</td>
 	<td style="background: darkgreen;">Works</td>
 </tr>
