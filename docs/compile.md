@@ -8,7 +8,7 @@ Here are instructions on how to compile librerpi
 Librerpi uses Git for the source code, you can get a copy of it by
 doing:
 
-    $ git clone --recursive-submodules http://GitHub.com/librerpi/lk-overlay.git
+    $ git clone --recurse-submodules http://GitHub.com/librerpi/lk-overlay.git
             
 
 ### Compile librerpi
