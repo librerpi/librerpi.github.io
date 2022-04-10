@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>The librerpi project</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="1337box/1337box.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	</head>
+	<body>
+		<div class="Nav">
+			<h1>The librerpi project</h1>
+			<ul class="NavLinks">
+				<li class="NavLink"><a href="http://github.com/librerpi/lk-overlay">Source Code</a></li>
+				<li class="NavLink"><a href="http://github.com/librerpi/librerpi.github.io">Improve the website</a></li>
+				<li class="NavLink"><a href="http://github.com/librerpi/rpi-open-firmware">Old codebase</a></li>
+			</ul>
+		</div>
+		<div class=list><h5>List</h5>			<li><a href="/compile.html">Compile librerpi</a></li>
+			<li><a href="/contribute.html">Contributions</a></li>
+			<li><a href="/how_it_works.html">How the free and nonfree firmware work</a></li>
+			<li><a href="/how_to_use_2d_drivers.html">How to use 2D drivers</a></li>
+			<li><a href="/index.html">Welcome</a></li>
+			<li><a href="/status.html">Status</a></li>
+			<li><a href="/video_demos.html">Videos showing librerpi</a></li>
+		</div>		<div class="content"><div class="h"><h1 id="Compile librerpi">Compile librerpi</h1><a aria-hidden="true" href="#Compile librerpi">#</a></div>
+
+<p>Here are instructions on how to compile librerpi</p>
+
+<div class="h"><h3 id="Download the source code">Download the source code</h3><a aria-hidden="true" href="#Download the source code">#</a></div>
+
+<p>Librerpi uses Git for the source code, you can get a copy of it by
+doing:</p>
+
+<pre><code>$ git clone --recursive-submodules http://GitHub.com/librerpi/lk-overlay.git
+</code></pre>
+
+<div class="h"><h3 id="Compile librerpi">Compile librerpi</h3><a aria-hidden="true" href="#Compile librerpi">#</a></div>
+
+<p>You need Nix for that:</p>
+
+<pre><code>$ sh &lt;(curl -L https://nixos.org/nix/install) --daemon
+</code></pre>
+
+<h4>RaspberryPi 0-3</h4>
+
+<p>Librerpi supports the Pi0-Pi3 line, but it's possible to load Linux only
+on the Pi2 at the moment so using the Pi2 is recommended.</p>
+
+<h5>Build stage1 (required for initialising dram and loading stage2)</h5>
+
+<pre><code>$ nix build -f release.nix vc4.vc4.stage1 -o stage1-link
+</code></pre>
+
+<h5>Build stage2 (only works on Pi2, required for initialising everything else and boot linux)</h5>
+
+<pre><code>$ nix build -f release.nix vc4.vc4.stage2 -o stage2-link
+</code></pre>
+
+<p>After that, copy the binairies to the SD Card,</p>
+
+<ul>
+<li><p>For stage1, copy the <code>lk.bin</code> to the FAT32 boot partition of the SD
+Card, and rename it to <code>bootcode.bin</code> ;</p></li>
+<li><p>For stage2, copy the <code>lk.elf</code> to /boot on the main partition.</p></li>
+</ul>
+
+<h4>RaspberryPi 4</h4>
+
+<p><strong>WARNING:</strong> While it is possible to compile librerpi for the
+RaspberryPi 4, we don't recommend doing so!</p>
+
+<p>You have 2 choices:</p>
+
+<ul>
+<li><p>You have a non-free stage1 but free stage2</p>
+
+<p>$ nix build -f release.nix rpi4.rpi4.recovery -o stage1-link # stage1</p></li>
+<li><p>You have a free stage1 but no stage2 (which means linux won't load)</p>
+
+<p>$ nix build -f release.nix rpi4.rpi4.start4 -p stage2-link # stage2</p></li>
+</ul>
+
+<p>After that,</p>
+
+<ul>
+<li><p>For non-free stage1 but free stage2, copy the stage2 to <code>/boot/start4.elf</code> ;</p></li>
+<li><p>For free stage1 but no stage2, copy the stage1 to the FAT32 partition as 
+<code>recovery.bin</code>.</p></li>
+</ul>
+		</div><footer>Generated with <a href="http://vitali64.duckdns.org/?p=utils/learn.git"><code>learn</code></a><br/>All the pages are licensed under the GPLv3 unless stated otherwise.</footer>
+	</body>
+</html>

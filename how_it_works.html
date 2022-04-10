@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>The librerpi project</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="1337box/1337box.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	</head>
+	<body>
+		<div class="Nav">
+			<h1>The librerpi project</h1>
+			<ul class="NavLinks">
+				<li class="NavLink"><a href="http://github.com/librerpi/lk-overlay">Source Code</a></li>
+				<li class="NavLink"><a href="http://github.com/librerpi/librerpi.github.io">Improve the website</a></li>
+				<li class="NavLink"><a href="http://github.com/librerpi/rpi-open-firmware">Old codebase</a></li>
+			</ul>
+		</div>
+		<div class=list><h5>List</h5>			<li><a href="/compile.html">Compile librerpi</a></li>
+			<li><a href="/contribute.html">Contributions</a></li>
+			<li><a href="/how_it_works.html">How the free and nonfree firmware work</a></li>
+			<li><a href="/how_to_use_2d_drivers.html">How to use 2D drivers</a></li>
+			<li><a href="/index.html">Welcome</a></li>
+			<li><a href="/status.html">Status</a></li>
+			<li><a href="/video_demos.html">Videos showing librerpi</a></li>
+		</div>		<div class="content"><div class="h"><h1 id="How the free and nonfree firmware work">How the free and nonfree firmware work</h1><a aria-hidden="true" href="#How the free and nonfree firmware work">#</a></div>
+
+<div class="h"><h3 id="Stages">Stages</h3><a aria-hidden="true" href="#Stages">#</a></div>
+
+<p>These firmwares (especially the stock firmware) have steps called
+"stages".</p>
+
+<p>On most RaspberryPies, you have the following :</p>
+
+<p>Stage 0, loads Stage 1 ;</p>
+
+<p>Stage 1, initialises the ram and loads Stage 2 ;</p>
+
+<p>Stage 2, initialises everything else and loads linux.
+<img tabindex=1 src="img/boot_pi2.png" align="center" width="40%"/><span class="f"><img src="img/boot_pi2.png" /></span><br/></p>
+
+<p>However, in the RaspberryPi 4, it's a bit different:</p>
+
+<p>Stage 0, loads Stage 1 ;</p>
+
+<p>Stage 1, initialises the ram, and network, among other things and loads
+Stage 2 ;</p>
+
+<p>Stage 2, initialises everything else and loads linux.</p>
+
+<p><img tabindex=1 src="img/boot_pi4.png" align="center" width="40%" /><span class="f"><img src="img/boot_pi4.png" /></span><br/></p>
+
+<p>And in the RaspberryPi 4 beta firmware, there's another stage and
+changes on Stage 1:</p>
+
+<p>Stage 0, loads Stage 1 ;</p>
+
+<p>Stage 1, initialises the ram and network, among other things and loads Stage 1.5, <code>bootcode.bin</code> ;</p>
+
+<p>Stage 1.5, initialises the network and usb, among other things and loads Stage 2</p>
+
+<p>Stage 2, initialises everything else and loads linux.</p>
+
+<p><img tabindex=1 src="img/boot_pi4-beta.png" align="center" width="40%" /><span class="f"><img src="img/boot_pi4-beta.png" /></span><br/></p>
+
+<div class="h"><h3 id="Boot flow and secure boot">Boot flow and secure boot</h3><a aria-hidden="true" href="#Boot flow and secure boot">#</a></div>
+
+<p>See <a href="https://github.com/librerpi/rpi-open-firmware/blob/master/docs/rom.txt#L11-L33">these notes.</a></p>
+		</div><footer>Generated with <a href="http://vitali64.duckdns.org/?p=utils/learn.git"><code>learn</code></a><br/>All the pages are licensed under the GPLv3 unless stated otherwise.</footer>
+	</body>
+</html>

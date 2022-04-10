@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>The librerpi project</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="1337box/1337box.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	</head>
+	<body>
+		<div class="Nav">
+			<h1>The librerpi project</h1>
+			<ul class="NavLinks">
+				<li class="NavLink"><a href="http://github.com/librerpi/lk-overlay">Source Code</a></li>
+				<li class="NavLink"><a href="http://github.com/librerpi/librerpi.github.io">Improve the website</a></li>
+				<li class="NavLink"><a href="http://github.com/librerpi/rpi-open-firmware">Old codebase</a></li>
+			</ul>
+		</div>
+		<div class=list><h5>List</h5>			<li><a href="/compile.html">Compile librerpi</a></li>
+			<li><a href="/contribute.html">Contributions</a></li>
+			<li><a href="/how_it_works.html">How the free and nonfree firmware work</a></li>
+			<li><a href="/how_to_use_2d_drivers.html">How to use 2D drivers</a></li>
+			<li><a href="/index.html">Welcome</a></li>
+			<li><a href="/status.html">Status</a></li>
+			<li><a href="/video_demos.html">Videos showing librerpi</a></li>
+		</div>		<div class="content"><div class="h"><h1 id="How to use 2D drivers">How to use 2D drivers</h1><a aria-hidden="true" href="#How to use 2D drivers">#</a></div>
+
+<p>Here are demos using 2D drivers:</p>
+
+<ul>
+<li><p>https://invidious.snopyta.org/watch?v=suswjbpR1HU</p></li>
+<li><p>https://invidious.snopyta.org/watch?v=JFmCin3EJIs</p></li>
+</ul>
+
+<p>The first video is a scaling test (source coming soon), 
+and the second video is a demo of moving a lot of sprites 
+around at once.</p>
+
+<ul>
+<li>https://github.com/librerpi/lk-overlay/blob/master/app/grid/grid.c</li>
+</ul>
+
+<p>In this file, <code>gfx_create_surface()</code> will create a bitmap image in ram.</p>
+
+<p>Lines 18-29:</p>
+
+<pre><code>  for (int x=0; x&lt; width; x++) {
+    for (int y=0; y &lt; height; y++) {
+      uint color = 0x00000000;
+      if (true) {
+        if (y % grid == 0) color |= 0xffff0000;
+        if (y % grid == 1) color |= 0xffff0000;
+        if (x % grid == 0) color |= 0xff0000ff;
+        if (x % grid == 1) color |= 0xff0000ff;
+      }
+      gfx_putpixel(gfx_grid, x, y, color);
+    }
+  }
+</code></pre>
+
+<p>Those lines will render a grid into it (there's also the 
+ability to load tga image files).</p>
+
+<p>Lines 31-35:</p>
+
+<pre><code>  grid_layer = malloc(sizeof(hvs_layer));
+  mk_unity_layer(grid_layer, gfx_grid, 60, 100, 100);
+  grid_layer-&gt;name = "grid";
+  grid_layer-&gt;w = 100;
+  grid_layer-&gt;h = 300;
+</code></pre>
+
+<p>Those lines will create a sprite description.</p>
+
+<p>Lines 37-40:</p>
+
+<pre><code>  mutex_acquire(&amp;channels[channel].lock);
+  hvs_dlist_add(channel, grid_layer);
+  hvs_update_dlist(channel);
+  mutex_release(&amp;channels[channel].lock);
+}
+</code></pre>
+
+<p>Those lines will make that sprite visible, and 
+will schedule a pageflip on the next vsync.</p>
+
+<p>Line 53:</p>
+
+<pre><code>    hvs_wait_vsync(channel);
+</code></pre>
+
+<p>will wait for vsync to happen.</p>
+
+<p>Lines 55-72:</p>
+
+<pre><code>    {
+      if (grow_w &amp;&amp; (grid_layer-&gt;w &gt;= 300)) grow_w = false;
+      if (!grow_w &amp;&amp; (grid_layer-&gt;w &lt;= 5)) grow_w = true;
+
+      int delta = 1;
+      if (!grow_w) delta = -1;
+
+      grid_layer-&gt;w += delta;
+    }
+    {
+      if (grow_h &amp;&amp; (grid_layer-&gt;h &gt;= 300)) grow_h = false;
+      if (!grow_h &amp;&amp; (grid_layer-&gt;h &lt;= 5)) grow_h = true;
+
+      int delta = 1;
+      if (!grow_h) delta = -1;
+
+      grid_layer-&gt;h += delta;
+    }
+</code></pre>
+
+<p>These lines change the sprite size.</p>
+
+<p>And finally, line 75:</p>
+
+<pre><code>    hvs_update_dlist(channel);
+</code></pre>
+
+<p>This line schedules another pageflip on vsync.</p>
+
+<p>With all that code, and some GPIO reading, you 
+can make a 2D demo or game, and this basically 
+uses 0% of the cpu, instead, it uses the gpu, 
+and has absolutely no screen tearing.</p>
+		</div><footer>Generated with <a href="http://vitali64.duckdns.org/?p=utils/learn.git"><code>learn</code></a><br/>All the pages are licensed under the GPLv3 unless stated otherwise.</footer>
+	</body>
+</html>
