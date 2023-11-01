@@ -3,15 +3,14 @@ How to use 2D drivers
 
 Here are demos using 2D drivers:
 
-- https://invidious.snopyta.org/watch?v=suswjbpR1HU
-
-- https://invidious.snopyta.org/watch?v=JFmCin3EJIs
+* https://www.youtube.com/watch?v=suswjbpR1HU
+* https://www.youtube.com/watch?v=JFmCin3EJIs
 
 The first video is a scaling test (source coming soon), 
 and the second video is a demo of moving a lot of sprites 
 around at once.
 
-- https://github.com/librerpi/lk-overlay/blob/master/app/grid/grid.c
+* https://github.com/librerpi/lk-overlay/blob/master/app/grid/grid.c
 
 In this file, `gfx_create_surface()` will create a bitmap image in ram.
 

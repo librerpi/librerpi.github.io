@@ -1,23 +1,21 @@
 Contributions
 =============
 
-So you want to contribute to librerpi? Great!
+librerpi repos
+--------------
 
-## librerpi repos
+Repos:
 
-Here are the librerpi repos:
+* The current codebase is located 
+  [here](http://github.com/librerpi/lk-overlay)
+* The *old* codebase (which is a fork of 
+  christinaa's work) is located 
+  [here](http://github.com/librerpi/rpi-open-firmware)
+* The website repo is located 
+  [here](http://github.com/librerpi/librerpi.github.io).
 
-- The current codebase is located 
-[here](http://github.com/librerpi/lk-overlay) ;
-
-- The *old* codebase (which is a fork of 
-christinaa's work) is located 
-[here](http://github.com/librerpi/rpi-open-firmware) ;
-
-- The website repo is located 
-[here](http://github.com/librerpi/librerpi.github.io).
-
-## Commits
+Commits
+-------
 
 Commit descriptions should describe what you've done, 
 commit messages such as "update file" or "add smth" 
@@ -26,17 +24,29 @@ aren't good commit messages.
 These are of course recommendations and aren't actually 
 required.
 
-## Website
+Website
+-------
 
-The website uses [learn](http://vitali64.duckdns.org?p=utils/learn.git)
-, here's how it works:
+The website uses a modified fork of [learn](https://git.vitali64.duckdns.org/utils/learn.git).
 
-- Markdown files are put in `docs/` ;
+Pages are written in [Markdown](https://en.wikipedia.org/wiki/Markdown), and 
+the website builder uses the first line of a file as the title:
 
-- The first line in the markdown file is used as a title ;
+    Title
+    =====
 
-- Every `git push` triggers the CI/CD which generates the website 
-you're reading.
+    Text...
 
-Every page is written in markdown and then compiled into html.
+The title of the page will be `Title`.
 
+Once you're done writing, you can put your files in `docs/` in the website 
+repository. Please don't put capital letters in names.
+
+After that, you may want to see how well it renders. Run:
+
+    $ ./learn.sh clear
+    $ ./learn.sh
+
+And point your web browser to `path/to/librerpi/website/repository/www/`.
+
+Once you're done, you can send patches to the GitHub page.
