@@ -18,21 +18,31 @@ If you see dead links or any other issue, feel free to report them too.
 Videos showing librerpi
 -----------------------
 
-- [2D and 3D demo](https://www.youtube.com/watch?v=GHDh9RYg6WI)
-- [librerpi booting NixOS with a 2D/3D demo](https://www.youtube.com/watch?v=BQyyVtmmVg8)
-- [13 sprites bouncing around](https://www.youtube.com/watch?v=JFmCin3EJIs)
-- [HVS scaling animation](https://www.youtube.com/watch?v=suswjbpR1HU)
+* [2D and 3D demo](https://www.youtube.com/watch?v=GHDh9RYg6WI)
+* [librerpi booting NixOS with a 2D/3D demo](https://www.youtube.com/watch?v=BQyyVtmmVg8)
+* [13 sprites bouncing around](https://www.youtube.com/watch?v=JFmCin3EJIs)
+* [HVS scaling animation](https://www.youtube.com/watch?v=suswjbpR1HU)
 * [Screensaving simulator with image loading](https://www.youtube.com/watch?v=ceRDMuPWyt0)
 * [Multiple RaspberryPi logos bouncing around](https://www.youtube.com/watch?v=XBdUVmar7Rg)
 * [Multiple RaspberryPi logos bouncing around, v2](https://www.youtube.com/watch?v=u7DzPvkzEGA)
 
 Contact
 -------
-You can find us over on IRC:
+Most of us are on Libera.Chat IRC and it's the recommended way to chat:
 
 * Network: `irc.libera.chat`
 * Port: 6667 (plain) or 6697 (TLS)
 * `##raspberrypi-internals`
+
+If you want, you can also join on Matrix:
+
+* Address: `#rpi-open-firmware-general-chat:matrix.org`
+
+Or if willing to chat on discord, you can follow this invite link: 
+https://discord.gg/FTDc9TWUQF
+
+Both 3 chats are bridged together so you can talk to us regardless of 
+which chat you're actually in (we use [matterbridge](https://github.com/42wim/matterbridge) to handle the bridging).
 
 What works
 ----------
