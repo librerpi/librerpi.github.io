@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>The librerpi project</title>
+<link rel="stylesheet" href="1337box/1337box.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+
+<body>
+<div class="Nav">
+<h1>The librerpi project</h1>
+<ul class="NavLinks">
+<li class="NavLink"><a href="https://github.com/librerpi/lk-overlay">Main git repository</a></li>
+<li class="NavLink"><a href="https://github.com/librerpi/librerpi.github.io">Edit the website</a></li>
+<li class="NavLink"><a href="https://libera.irclog.whitequark.org/~h~raspberrypi-internals">IRC logs</a></li>
+<li class="NavLink"><a href="https://hydra.angeldsis.com/jobset/things/littlekernel-overlay#tabs-jobs">CI builds</a></li>
+</ul>
+</div>
+<details class="winList">
+<summary>List of pages</summary>
+<ul class="list">
+<li class="winListClose"><button  onclick="document.querySelector('.winList') .removeAttribute('open')">Close</button></li>
+<li><h3 style="margin: 5px;">Page list</h3></li>
+<li><a href="/index.html">Home</a></li>
+<li><a href="/compile.html">Compile/Install librerpi</a></li>
+<li><a href="/contribute.html">Contributions</a></li>
+<li><a href="/how_it_works.html">How the free and nonfree firmware work</a></li>
+<li><a href="/how_to_use_2d_drivers.html">How to use 2D drivers</a></li>
+</ul>
+</details>
+<div class="content">
+<h1 id="Compile/Install librerpi">Compile/Install librerpi</h1>
+
+<p>Here are instructions on how to compile librerpi. If you're using 
+prebuilt binaries, go to the "Installation of prebuilt binaries" section.</p>
+
+<h2 id="Download the source code">Download the source code</h2>
+
+<p>Librerpi uses Git for the source code, you can get a copy of it by
+doing:</p>
+
+<pre><code>$ git clone --recurse-submodules http://github.com/librerpi/lk-overlay.git
+</code></pre>
+
+<h2 id="Compile librerpi">Compile librerpi</h2>
+
+<p>You need Nix for that:</p>
+
+<pre><code>$ sh &lt;(curl -L https://nixos.org/nix/install) --daemon
+</code></pre>
+
+<h3 id="RaspberryPi 0-3">RaspberryPi 0-3</h3>
+
+<p>Librerpi supports the Pi0-Pi3 line, but it's possible to load Linux only
+on the Pi2 at the moment so using the Pi2 is recommended.</p>
+
+<h4>Build stage1 (required for initialising dram and loading stage2)</h4>
+
+<pre><code>$ nix build -f release.nix vc4.vc4.stage1 -o stage1-link
+</code></pre>
+
+<h4>Build stage2 (loads linux only on the Pi2, required for initialising everything else)</h4>
+
+<pre><code>$ nix build -f release.nix vc4.vc4.stage2 -o stage2-link
+</code></pre>
+
+<p>After that, copy the binairies to the SD Card,</p>
+
+<ul>
+<li><p>For stage1, copy the <code>lk.bin</code> to the FAT32 boot partition of the SD
+Card, and rename it to <code>bootcode.bin</code> ;</p></li>
+<li><p>For stage2, copy the <code>lk.elf</code> to /boot on the main partition
+(or <code>start4.elf</code> on the FAT32 partition if using a non-free stage1).</p></li>
+</ul>
+
+<h3 id="RaspberryPi 4">RaspberryPi 4</h3>
+
+<p><strong>WARNING:</strong> While it is possible to "run" librerpi on the
+RaspberryPi 4, we don't recommend doing so! Currently, the Pi4 port lacks 
+a ton of functionnality for it to be usable (it can't even initialise the 
+arm CPU) and as such, it's not recommended to use the Pi4 with librerpi in 
+production. You have been warned!</p>
+
+<h4>Build stage1 (required for initialising dram and loading stage2)</h4>
+
+<pre><code>$ nix build -f release.nix rpi4.rpi4.recovery -o stage1-link # stage1
+</code></pre>
+
+<h4>Build stage2 (doesn't load linux yet, currently cannot bring up the</h4>
+
+<p>arm CPU)</p>
+
+<pre><code>$ nix build -f release.nix rpi4.rpi4.start4 -p stage2-link # stage2
+</code></pre>
+
+<p>After that, copy the binairies to the SD Card,</p>
+
+<ul>
+<li><p>For stage1, copy the <code>lk.bin</code> to the FAT32 boot partition of the SD
+Card, and rename it to <code>recovery.bin</code></p></li>
+<li><p>For stage2, copy the <code>lk.elf</code> to /boot on the main partition 
+(or <code>start4.elf</code> on the FAT32 partition if using a non-free stage1).</p></li>
+</ul>
+
+<h2 id="Installation of prebuilt binaries">Installation of prebuilt binaries</h2>
+
+<p>There's a CI available which builds binaries daily. Click on the <code>CI builds</code> 
+link at the header, then <code>vc4.vc4.stage1</code> and grab the <code>lk.bin</code> binary, then 
+go back and go to <code>vc4.vc4.stage2</code> and grab the <code>lk.elf</code> binary. Then copy 
+<code>lk.bin</code> to the FAT32 boot partition of the SD Card, and rename it to 
+<code>bootcode.bin</code>, and copy <code>lk.elf</code> to /boot on the main partition.</p>
+</div>
+<hr/>
+<footer>All the pages are licensed under the GPL-3.0+ license unless stated otherwise.</footer>
+</body>
+<style>
+body
+{
+	background-color: white;
+	color: #222;
+	font-size: 12pt;
+	margin-bottom: 5px;
+}
+
+.content
+{
+	max-width: 130ch;
+	margin: 0 auto;
+
+}
+
+.winList li.winListClose
+{
+	float: right;
+}
+
+.winList li.winListClose button
+{
+	border: none;
+	background: #333;
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.winList summary
+{
+	width: fit-content;
+	margin: 0 5em;
+	list-style: none;
+	padding: 5px;
+	background: #222;
+	color: white;
+	cursor: pointer;
+}
+
+.list
+{
+	position: fixed;
+	top: 30%;
+	left: 35%;
+	right: 35%;
+	background: #222;
+	padding: 10px 10px;
+	color: white;
+	list-style: none;
+	box-shadow: 0px 0px 100px black;
+}
+
+.list a
+{
+	display: block;
+	text-decoration: none;
+	color: white;
+	padding: 5px 5px;
+}
+
+.list a:hover
+{
+	background: #333
+}
+
+img
+{
+	width: 60%;
+}
+
+hr
+{
+	border: none;
+	border: 3px solid #222;
+}
+
+table
+{
+	border-collapse: collapse;
+}
+
+table thead th
+{
+	padding: 10px;
+	background: #222;
+	color: white;
+}
+
+table td, table th, table tr
+{
+	border: 1px solid #222;
+	padding: 6px;
+}
+
+.t_red
+{
+	background: orangered;
+}
+
+.t_green
+{
+	background: lightgreen;
+}
+
+.t_orange
+{
+	background: orange;
+}
+
+img
+{
+	padding: 20px;
+}
+
+.content h1, .content h2, .content h3, 
+.content h4, .content h5
+{
+	border-left: 10px solid #222;
+	padding: 0 5px;
+	margin: 0;
+}
+
+h1:target, h2:target, h3:target, h4:target, h5:target
+{
+	background: #222;
+	color: white;
+}
+
+.NavLinks
+{
+	margin-top: 1vh;
+	padding: 20px;
+	display: flex;
+	text-align: center;
+	list-style: none;
+}
+
+.Nav
+{
+	background: url("img/banner.jpg");
+	background-position: 0 center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 5px 10em;
+}
+
+.Nav h1
+{
+	color: white;
+	text-shadow: 1px 1px 10px black;
+}
+
+.NavLink a
+{
+	color:black;
+	text-decoration: none;
+	background-color: white;
+	color: black;
+	margin: 0px;
+	padding: 10px;
+
+}
+
+.NavLink
+{
+	margin: 10px;
+}
+
+.NavLink a:hover
+{
+	background-color: black;
+	color: white;
+}
+
+pre
+{
+	overflow: auto;
+	background-color: whitesmoke;
+	color: black;
+	padding: 5px;
+}
+</style>
+</html>
+<code>
+HEAD: bad8730d446538e8d85bf7587c2958e0c81fb29b
+</code>

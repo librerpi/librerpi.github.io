@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>The librerpi project</title>
+<link rel="stylesheet" href="1337box/1337box.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+
+<body>
+<div class="Nav">
+<h1>The librerpi project</h1>
+<ul class="NavLinks">
+<li class="NavLink"><a href="https://github.com/librerpi/lk-overlay">Main git repository</a></li>
+<li class="NavLink"><a href="https://github.com/librerpi/librerpi.github.io">Edit the website</a></li>
+<li class="NavLink"><a href="https://libera.irclog.whitequark.org/~h~raspberrypi-internals">IRC logs</a></li>
+<li class="NavLink"><a href="https://hydra.angeldsis.com/jobset/things/littlekernel-overlay#tabs-jobs">CI builds</a></li>
+</ul>
+</div>
+<details class="winList">
+<summary>List of pages</summary>
+<ul class="list">
+<li class="winListClose"><button  onclick="document.querySelector('.winList') .removeAttribute('open')">Close</button></li>
+<li><h3 style="margin: 5px;">Page list</h3></li>
+<li><a href="/index.html">Home</a></li>
+<li><a href="/compile.html">Compile/Install librerpi</a></li>
+<li><a href="/contribute.html">Contributions</a></li>
+<li><a href="/how_it_works.html">How the free and nonfree firmware work</a></li>
+<li><a href="/how_to_use_2d_drivers.html">How to use 2D drivers</a></li>
+</ul>
+</details>
+<div class="content">
+<h1 id="How the free and nonfree firmware work">How the free and nonfree firmware work</h1>
+
+<h2 id="Stages">Stages</h2>
+
+<p>These firmwares (especially the stock firmware) have steps called
+"stages".</p>
+
+<p>On most Raspberry Pi boards, you have the following:</p>
+
+<ul>
+<li>Stage 0, loads Stage 1</li>
+<li>Stage 1, initialises the RAM and loads Stage 2</li>
+<li>Stage 2, initialises everything else and loads linux.</li>
+</ul>
+
+<p><img src="img/boot_pi2.png" alt="" title="" /></p>
+
+<p>However, in the Raspberry Pi 4, it's a bit different:</p>
+
+<p>Stage 0, loads Stage 1
+* Stage 1, initialises the ram, network, etc.. and loads
+  Stage 2
+* Stage 2, initialises everything else and loads linux.</p>
+
+<p><img src="img/boot_pi4.png" alt="" title="" /></p>
+
+<p>And in the Raspberry Pi 4 beta firmware, there's another stage and
+changes on Stage 1:</p>
+
+<ul>
+<li>Stage 0, loads Stage 1 ;</li>
+<li>Stage 1, initialises the ram and network, among other things and loads Stage 1.5, 
+<code>bootcode.bin</code></li>
+<li>Stage 1.5, initialises the network and usb, among other things and loads Stage 2</li>
+<li>Stage 2, initialises everything else and loads linux.</li>
+</ul>
+
+<p><img src="img/boot_pi4-beta.png" alt="" title="" /></p>
+
+<h2 id="Boot flow and secure boot">Boot flow and secure boot</h2>
+
+<p>See <a href="https://github.com/librerpi/rpi-open-firmware/blob/master/docs/rom.txt#L11-L33">these notes.</a></p>
+</div>
+<hr/>
+<footer>All the pages are licensed under the GPL-3.0+ license unless stated otherwise.</footer>
+</body>
+<style>
+body
+{
+	background-color: white;
+	color: #222;
+	font-size: 12pt;
+	margin-bottom: 5px;
+}
+
+.content
+{
+	max-width: 130ch;
+	margin: 0 auto;
+
+}
+
+.winList li.winListClose
+{
+	float: right;
+}
+
+.winList li.winListClose button
+{
+	border: none;
+	background: #333;
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.winList summary
+{
+	width: fit-content;
+	margin: 0 5em;
+	list-style: none;
+	padding: 5px;
+	background: #222;
+	color: white;
+	cursor: pointer;
+}
+
+.list
+{
+	position: fixed;
+	top: 30%;
+	left: 35%;
+	right: 35%;
+	background: #222;
+	padding: 10px 10px;
+	color: white;
+	list-style: none;
+	box-shadow: 0px 0px 100px black;
+}
+
+.list a
+{
+	display: block;
+	text-decoration: none;
+	color: white;
+	padding: 5px 5px;
+}
+
+.list a:hover
+{
+	background: #333
+}
+
+img
+{
+	width: 60%;
+}
+
+hr
+{
+	border: none;
+	border: 3px solid #222;
+}
+
+table
+{
+	border-collapse: collapse;
+}
+
+table thead th
+{
+	padding: 10px;
+	background: #222;
+	color: white;
+}
+
+table td, table th, table tr
+{
+	border: 1px solid #222;
+	padding: 6px;
+}
+
+.t_red
+{
+	background: orangered;
+}
+
+.t_green
+{
+	background: lightgreen;
+}
+
+.t_orange
+{
+	background: orange;
+}
+
+img
+{
+	padding: 20px;
+}
+
+.content h1, .content h2, .content h3, 
+.content h4, .content h5
+{
+	border-left: 10px solid #222;
+	padding: 0 5px;
+	margin: 0;
+}
+
+h1:target, h2:target, h3:target, h4:target, h5:target
+{
+	background: #222;
+	color: white;
+}
+
+.NavLinks
+{
+	margin-top: 1vh;
+	padding: 20px;
+	display: flex;
+	text-align: center;
+	list-style: none;
+}
+
+.Nav
+{
+	background: url("img/banner.jpg");
+	background-position: 0 center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 5px 10em;
+}
+
+.Nav h1
+{
+	color: white;
+	text-shadow: 1px 1px 10px black;
+}
+
+.NavLink a
+{
+	color:black;
+	text-decoration: none;
+	background-color: white;
+	color: black;
+	margin: 0px;
+	padding: 10px;
+
+}
+
+.NavLink
+{
+	margin: 10px;
+}
+
+.NavLink a:hover
+{
+	background-color: black;
+	color: white;
+}
+
+pre
+{
+	overflow: auto;
+	background-color: whitesmoke;
+	color: black;
+	padding: 5px;
+}
+</style>
+</html>
+<code>
+HEAD: bad8730d446538e8d85bf7587c2958e0c81fb29b
+</code>
